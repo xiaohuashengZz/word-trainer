@@ -1,9 +1,0 @@
-C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\windows_collections-ecd025a7c4a96513.d: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\bindings.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\../readme.md
-
-C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\libwindows_collections-ecd025a7c4a96513.rlib: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\bindings.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\../readme.md
-
-C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\libwindows_collections-ecd025a7c4a96513.rmeta: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\bindings.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\../readme.md
-
-C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\lib.rs:
-C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\bindings.rs:
-C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\windows-collections-0.2.0\src\../readme.md:

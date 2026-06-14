@@ -1,8 +1,0 @@
-C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\serde_with_macros-8007a44db6f0830c.d: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\apply.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\lazy_bool.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\utils.rs
-
-C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\serde_with_macros-8007a44db6f0830c.dll: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\apply.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\lazy_bool.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\utils.rs
-
-C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\lib.rs:
-C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\apply.rs:
-C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\lazy_bool.rs:
-C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\serde_with_macros-3.21.0\src\utils.rs:
