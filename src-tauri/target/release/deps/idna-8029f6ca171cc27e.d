@@ -1,0 +1,10 @@
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\idna-8029f6ca171cc27e.d: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\deprecated.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\punycode.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\uts46.rs
+
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\libidna-8029f6ca171cc27e.rlib: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\deprecated.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\punycode.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\uts46.rs
+
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\libidna-8029f6ca171cc27e.rmeta: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\deprecated.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\punycode.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\uts46.rs
+
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\lib.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\deprecated.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\punycode.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\idna-1.1.0\src\uts46.rs:

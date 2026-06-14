@@ -1,0 +1,10 @@
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\walkdir-c1682d78a0a930d3.d: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\dent.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\error.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\util.rs
+
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\libwalkdir-c1682d78a0a930d3.rlib: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\dent.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\error.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\util.rs
+
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\libwalkdir-c1682d78a0a930d3.rmeta: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\dent.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\error.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\util.rs
+
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\lib.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\dent.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\error.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\walkdir-2.5.0\src\util.rs:

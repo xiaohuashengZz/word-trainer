@@ -1,0 +1,10 @@
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\litemap-4af7ea1a27d74b22.d: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\map.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\store\mod.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\store\slice_impl.rs
+
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\liblitemap-4af7ea1a27d74b22.rlib: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\map.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\store\mod.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\store\slice_impl.rs
+
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\liblitemap-4af7ea1a27d74b22.rmeta: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\map.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\store\mod.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\store\slice_impl.rs
+
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\lib.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\map.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\store\mod.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\litemap-0.8.2\src\store\slice_impl.rs:

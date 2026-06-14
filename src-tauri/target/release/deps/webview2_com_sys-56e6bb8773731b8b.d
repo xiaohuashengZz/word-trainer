@@ -1,0 +1,9 @@
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\webview2_com_sys-56e6bb8773731b8b.d: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\declared_interfaces.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\bindings.rs
+
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\libwebview2_com_sys-56e6bb8773731b8b.rlib: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\declared_interfaces.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\bindings.rs
+
+C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\deps\libwebview2_com_sys-56e6bb8773731b8b.rmeta: C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\lib.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\declared_interfaces.rs C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\bindings.rs
+
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\lib.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\declared_interfaces.rs:
+C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\webview2-com-sys-0.38.2\src\bindings.rs:

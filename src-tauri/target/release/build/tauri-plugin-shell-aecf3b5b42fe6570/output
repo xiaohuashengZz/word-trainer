@@ -1,0 +1,11 @@
+cargo:rerun-if-changed=permissions
+cargo:PERMISSION_FILES_PATH=C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\build\tauri-plugin-shell-aecf3b5b42fe6570\out\tauri-plugin-shell-permission-files
+cargo:rerun-if-env-changed=REMOVE_UNUSED_COMMANDS
+cargo:GLOBAL_SCOPE_SCHEMA_PATH=C:\Users\30359\Desktop\Code_Practice\app\word-trainer\src-tauri\target\release\build\tauri-plugin-shell-aecf3b5b42fe6570\out\global-scope.json
+cargo:GLOBAL_API_SCRIPT_PATH=\\?\C:\Users\30359\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\tauri-plugin-shell-2.3.5\api-iife.js
+cargo:rustc-check-cfg=cfg(mobile)
+cargo:rustc-check-cfg=cfg(desktop)
+cargo:rustc-cfg=desktop
+cargo:rustc-check-cfg=cfg(desktop)
+cargo:rustc-cfg=desktop
+cargo:rustc-check-cfg=cfg(mobile)
