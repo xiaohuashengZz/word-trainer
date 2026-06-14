@@ -182,7 +182,7 @@ impl Database {
         let mut stmt = conn.prepare(
             "SELECT word_id, interval, ease_factor, repetitions, next_review, last_review FROM schedules WHERE word_id = ?1"
         )?;
-        let schedule = stmt.query_row([word_id], |row| {
+        let schedule = stmt.query_row(params![word_id], |row| {
             Ok(Schedule {
                 word_id: row.get(0)?, interval: row.get(1)?, ease_factor: row.get(2)?,
                 repetitions: row.get(3)?, next_review: row.get(4)?, last_review: row.get(5)?,
@@ -209,6 +209,13 @@ impl Database {
     pub fn get_word_count(&self) -> SqliteResult<i32> {
         let conn = self.conn.lock().unwrap();
         let count: i32 = conn.query_row("SELECT COUNT(*) FROM words", [], |row| row.get(0))?;
+        Ok(count)
+    }
+
+    pub fn get_word_count_by_text(&self, word_text: &str) -> SqliteResult<i32> {
+        let conn = self.conn.lock().unwrap();
+        let mut stmt = conn.prepare("SELECT COUNT(*) FROM words WHERE LOWER(word) = LOWER(?1)")?;
+        let count: i32 = stmt.query_row(params![word_text], |row| row.get(0))?;
         Ok(count)
     }
 

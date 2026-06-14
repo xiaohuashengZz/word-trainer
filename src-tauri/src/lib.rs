@@ -69,7 +69,7 @@ pub fn run() {
             commands::list_words, commands::add_word, commands::delete_word,
             commands::get_statistics, commands::get_next_review_word, commands::submit_review,
             commands::skip_word, commands::unskip_word, commands::get_setting,
-            commands::set_setting, commands::get_word_count,
+            commands::set_setting, commands::get_word_count, commands::download_word_book,
             commands::start_reminder, commands::stop_reminder, commands::update_reminder_interval,
         ])
         .run(tauri::generate_context!())

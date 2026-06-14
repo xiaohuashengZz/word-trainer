@@ -17,8 +17,9 @@ const INTERVAL_OPTIONS = [
 const Settings: Component = () => {
   const reviewInterval = useStore($reviewInterval);
   const [isSaving, setIsSaving] = createSignal(false);
-  const [message, setMessage] = createSignal<string | null>(null);
+  const [message, setMessage] = createSignal<{ type: 'success' | 'error'; text: string } | null>(null);
   const [reminderEnabled, setReminderEnabled] = createSignal(true);
+  const [customInterval, setCustomInterval] = createSignal('');
 
   // 加载设置
   onMount(async () => {
@@ -32,7 +33,7 @@ const Settings: Component = () => {
         setReminderEnabled(savedEnabled === 'true');
       }
     } catch (e) {
-      console.error('Failed to load settings:', e);
+      console.error('加载设置失败:', e);
     }
   });
 
@@ -42,27 +43,46 @@ const Settings: Component = () => {
     setReminderEnabled(newValue);
     try {
       await setSetting('reminder_enabled', newValue.toString());
-      setMessage(newValue ? '复习提醒已开启' : '复习提醒已关闭');
+      setMessage({ type: 'success', text: newValue ? '复习提醒已开启' : '复习提醒已关闭' });
       setTimeout(() => setMessage(null), 2000);
     } catch (e) {
-      setReminderEnabled(!newValue); // 回滚
-      setMessage('保存失败');
+      setReminderEnabled(!newValue);
+      setMessage({ type: 'error', text: '保存失败' });
     }
   };
 
   // 保存间隔设置
   const handleIntervalChange = async (minutes: number) => {
+    if (minutes < 1 || minutes > 1440) {
+      setMessage({ type: 'error', text: '请输入 1-1440 之间的数字' });
+      return;
+    }
     setIsSaving(true);
     setMessage(null);
     try {
       $reviewInterval.set(minutes);
       await setSetting('review_interval', minutes.toString());
-      setMessage('设置已保存');
+      setMessage({ type: 'success', text: `已设置为 ${minutes} 分钟` });
       setTimeout(() => setMessage(null), 2000);
     } catch (e) {
-      setMessage('保存失败');
+      setMessage({ type: 'error', text: '保存失败' });
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  // 处理自定义输入
+  const handleCustomInput = (e: Event) => {
+    const value = (e.target as HTMLInputElement).value.replace(/[^\d]/g, '');
+    setCustomInterval(value);
+  };
+
+  // 提交自定义输入
+  const handleCustomSubmit = () => {
+    const value = parseInt(customInterval(), 10);
+    if (!isNaN(value) && value > 0) {
+      handleIntervalChange(value);
+      setCustomInterval('');
     }
   };
 
@@ -107,13 +127,30 @@ const Settings: Component = () => {
           </For>
         </div>
 
+        <div class="custom-interval-input">
+          <input
+            type="text"
+            placeholder="自定义（1-1440分钟）"
+            value={customInterval()}
+            onInput={handleCustomInput}
+            onKeyPress={(e) => e.key === 'Enter' && handleCustomSubmit()}
+          />
+          <button
+            class="btn-primary"
+            onClick={handleCustomSubmit}
+            disabled={!customInterval() || isSaving()}
+          >
+            确定
+          </button>
+        </div>
+
         <div class="current-interval">
           当前设置：每 <strong>{reviewInterval()}</strong> 分钟弹出一次复习提醒
         </div>
 
         {message() && (
-          <div class={`message ${message().includes('失败') ? 'error' : 'success'}`}>
-            {message()}
+          <div class={`message ${message()!.type}`}>
+            {message()!.text}
           </div>
         )}
       </div>
