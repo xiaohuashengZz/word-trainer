@@ -71,6 +71,7 @@ pub fn run() {
             commands::skip_word, commands::unskip_word, commands::get_setting,
             commands::set_setting, commands::get_word_count, commands::download_word_book,
             commands::start_reminder, commands::stop_reminder, commands::update_reminder_interval,
+            commands::test_youdao_api, commands::download_word_from_api, commands::download_words_from_api,
         ])
         .run(tauri::generate_context!())
         .expect("运行应用时发生错误");

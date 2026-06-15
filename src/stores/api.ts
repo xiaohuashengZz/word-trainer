@@ -60,3 +60,18 @@ export async function setSetting(key: string, value: string): Promise<void> {
 export async function getWordCount(): Promise<number> {
   return await invoke<number>('get_word_count');
 }
+
+// 测试有道API连接
+export async function testYoudaoApi(appKey: string, appSecret: string): Promise<{ success: boolean; message: string }> {
+  return await invoke<{ success: boolean; message: string }>('test_youdao_api', { appKey, appSecret });
+}
+
+// 从API下载单个单词
+export async function downloadWordFromApi(wordText: string): Promise<any> {
+  return await invoke<any>('download_word_from_api', { wordText });
+}
+
+// 批量从API下载单词
+export async function downloadWordsFromApi(words: string[]): Promise<{ success: number; skipped: number; failed: number; errors: string[] }> {
+  return await invoke<{ success: number; skipped: number; failed: number; errors: string[] }>('download_words_from_api', { words });
+}

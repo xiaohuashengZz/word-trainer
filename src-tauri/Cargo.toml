@@ -28,6 +28,9 @@ env_logger = "0.11"
 word-trainer-core = { path = "core" }
 chrono = "0.4"
 uuid = { version = "1", features = ["v4"] }
+reqwest = { version = "0.12", features = ["json", "blocking"] }
+tokio = { version = "1", features = ["rt-multi-thread", "time", "sync"] }
+md5 = "0.7"
 
 [dev-dependencies]
 tempfile = "3"

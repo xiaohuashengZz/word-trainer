@@ -5,7 +5,7 @@ use tauri::State;
 use serde::{Deserialize, Serialize};
 
 use crate::domain::{Definition, ReviewLog, Schedule, Word, WordStatus};
-use crate::infrastructure::Database;
+use crate::infrastructure::{Database, youdao::{YoudaoConfig, lookup_word_sync}};
 use crate::algorithm::Sm2Algorithm;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -301,4 +301,250 @@ fn get_word_book_data(book_id: &str) -> Vec<(&'static str, &'static str, &'stati
             ("speak", "/spiːk/", "说"),
         ],
     }.to_vec()
+}
+
+// 测试有道 API 连接
+#[tauri::command]
+pub async fn test_youdao_api(
+    db: State<'_, Arc<Database>>,
+    app_key: String,
+    app_secret: String,
+) -> Result<serde_json::Value, String> {
+    let config = YoudaoConfig {
+        app_key,
+        app_secret,
+        api_url: "https://openapi.youdao.com/api".to_string(),
+    };
+
+    // 测试查询一个常用单词
+    match lookup_word_sync(&config, "hello") {
+        Ok(response) => {
+            if response.error_code == "0" {
+                Ok(serde_json::json!({
+                    "success": true,
+                    "message": "连接成功",
+                    "sample": {
+                        "word": response.query,
+                        "translation": response.translation
+                    }
+                }))
+            } else {
+                Ok(serde_json::json!({
+                    "success": false,
+                    "message": format!("API返回错误: {}", response.error_code)
+                }))
+            }
+        }
+        Err(e) => Ok(serde_json::json!({
+            "success": false,
+            "message": e
+        })),
+    }
+}
+
+// 使用 API 下载单词（单个）
+#[tauri::command]
+pub async fn download_word_from_api(
+    db: State<'_, Arc<Database>>,
+    word_text: String,
+) -> Result<Word, String> {
+    // 从数据库获取 API 配置
+    let app_key = db.get_setting("youdao_app_key")
+        .map_err(|e| e.to_string())?
+        .ok_or("API未配置，请在设置中配置有道API")?;
+    let app_secret = db.get_setting("youdao_app_secret")
+        .map_err(|e| e.to_string())?
+        .ok_or("API未配置，请在设置中配置有道API")?;
+
+    let config = YoudaoConfig {
+        app_key,
+        app_secret,
+        api_url: "https://openapi.youdao.com/api".to_string(),
+    };
+
+    // 查询单词
+    let response = lookup_word_sync(&config, &word_text)
+        .map_err(|e| e.to_string())?;
+
+    // 检查是否已存在
+    if db.get_word_count_by_text(&word_text).map_err(|e| e.to_string())? > 0 {
+        return Err("单词已存在".to_string());
+    }
+
+    // 创建单词
+    let mut word = Word::new(word_text.clone());
+
+    // 从响应中提取信息
+    if let Some(basic) = &response.basic {
+        word.phonetic = basic.us_phonetic.clone()
+            .or_else(|| basic.uk_phonetic.clone())
+            .or_else(|| basic.phonetic.clone());
+
+        // 创建释义
+        let definitions = if let Some(trans) = &basic.translations {
+            trans.iter()
+                .filter_map(|t| t.trans.clone())
+                .flat_map(|defs| defs)
+                .map(|def| Definition {
+                    id: uuid::Uuid::new_v4().to_string(),
+                    pos: None,
+                    definition: def,
+                    example: None,
+                })
+                .collect()
+        } else if let Some(trans) = &response.translation {
+            trans.iter()
+                .map(|def| Definition {
+                    id: uuid::Uuid::new_v4().to_string(),
+                    pos: None,
+                    definition: def.clone(),
+                    example: None,
+                })
+                .collect()
+        } else {
+            Vec::new()
+        };
+
+        word.definitions = definitions;
+    } else if let Some(trans) = &response.translation {
+        word.definitions = trans.iter()
+            .map(|def| Definition {
+                id: uuid::Uuid::new_v4().to_string(),
+                pos: None,
+                definition: def.clone(),
+                example: None,
+            })
+            .collect();
+    }
+
+    // 如果没有释义，添加翻译字段的内容
+    if word.definitions.is_empty() {
+        if let Some(trans) = &response.translation {
+            for t in trans {
+                word.definitions.push(Definition {
+                    id: uuid::Uuid::new_v4().to_string(),
+                    pos: None,
+                    definition: t.clone(),
+                    example: None,
+                });
+            }
+        }
+    }
+
+    // 保存到数据库
+    db.insert_word(&word).map_err(|e| e.to_string())?;
+    for def in &word.definitions {
+        db.insert_definition(&word.id, def).map_err(|e| e.to_string())?;
+    }
+    let schedule = Schedule::new(word.id.clone());
+    db.insert_schedule(&schedule).map_err(|e| e.to_string())?;
+
+    log::info!("通过API下载单词: {}", word_text);
+    Ok(word)
+}
+
+// 批量下载单词
+#[tauri::command]
+pub async fn download_words_from_api(
+    db: State<'_, Arc<Database>>,
+    words: Vec<String>,
+) -> Result<serde_json::Value, String> {
+    let app_key = db.get_setting("youdao_app_key")
+        .map_err(|e| e.to_string())?
+        .ok_or("API未配置，请在设置中配置有道API")?;
+    let app_secret = db.get_setting("youdao_app_secret")
+        .map_err(|e| e.to_string())?
+        .ok_or("API未配置，请在设置中配置有道API")?;
+
+    let config = YoudaoConfig {
+        app_key,
+        app_secret,
+        api_url: "https://openapi.youdao.com/api".to_string(),
+    };
+
+    let mut success_count = 0;
+    let mut skipped_count = 0;
+    let mut failed_count = 0;
+    let mut errors: Vec<String> = Vec::new();
+
+    for word_text in words {
+        // 检查是否已存在
+        if db.get_word_count_by_text(&word_text).map_err(|e| e.to_string())? > 0 {
+            skipped_count += 1;
+            continue;
+        }
+
+        match lookup_word_sync(&config, &word_text) {
+            Ok(response) => {
+                let mut word = Word::new(word_text.clone());
+
+                if let Some(basic) = &response.basic {
+                    word.phonetic = basic.us_phonetic.clone()
+                        .or_else(|| basic.uk_phonetic.clone())
+                        .or_else(|| basic.phonetic.clone());
+
+                    if let Some(trans) = &basic.translations {
+                        for t in trans {
+                            if let Some(defs) = &t.trans {
+                                for def in defs {
+                                    word.definitions.push(Definition {
+                                        id: uuid::Uuid::new_v4().to_string(),
+                                        pos: None,
+                                        definition: def.clone(),
+                                        example: None,
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if word.definitions.is_empty() {
+                    if let Some(trans) = &response.translation {
+                        for t in trans {
+                            word.definitions.push(Definition {
+                                id: uuid::Uuid::new_v4().to_string(),
+                                pos: None,
+                                definition: t.clone(),
+                                example: None,
+                            });
+                        }
+                    }
+                }
+
+                if let Err(e) = db.insert_word(&word) {
+                    failed_count += 1;
+                    errors.push(format!("{}: {}", word_text, e));
+                    continue;
+                }
+
+                for def in &word.definitions {
+                    if let Err(e) = db.insert_definition(&word.id, def) {
+                        log::warn!("插入释义失败: {}", e);
+                    }
+                }
+
+                let schedule = Schedule::new(word.id.clone());
+                if let Err(e) = db.insert_schedule(&schedule) {
+                    log::warn!("插入计划失败: {}", e);
+                }
+
+                success_count += 1;
+            }
+            Err(e) => {
+                failed_count += 1;
+                errors.push(format!("{}: {}", word_text, e));
+            }
+        }
+
+        // 避免请求过快
+        tokio::time::sleep(tokio::time::Duration::from_millis(200)).await;
+    }
+
+    Ok(serde_json::json!({
+        "success": success_count,
+        "skipped": skipped_count,
+        "failed": failed_count,
+        "errors": errors
+    }))
 }

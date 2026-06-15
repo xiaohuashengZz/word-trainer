@@ -1,4 +1,5 @@
-import { Component, createSignal, onMount, For } from 'solid-js';
+import { Component, createSignal, onMount, For, Show } from 'solid-js';
+import { invoke } from '@tauri-apps/api/core';
 import { useStore } from '@nanostores/solid';
 import { $reviewInterval } from '../stores/appStore';
 import { getSetting, setSetting } from '../stores/api';
@@ -21,6 +22,13 @@ const Settings: Component = () => {
   const [reminderEnabled, setReminderEnabled] = createSignal(true);
   const [customInterval, setCustomInterval] = createSignal('');
 
+  // API 配置相关状态
+  const [apiAppKey, setApiAppKey] = createSignal('');
+  const [apiAppSecret, setApiAppSecret] = createSignal('');
+  const [showApiSecret, setShowApiSecret] = createSignal(false);
+  const [isApiConfigured, setIsApiConfigured] = createSignal(false);
+  const [testingApi, setTestingApi] = createSignal(false);
+
   // 加载设置
   onMount(async () => {
     try {
@@ -31,6 +39,14 @@ const Settings: Component = () => {
       const savedEnabled = await getSetting('reminder_enabled');
       if (savedEnabled !== null) {
         setReminderEnabled(savedEnabled === 'true');
+      }
+      // 加载 API 配置
+      const savedAppKey = await getSetting('youdao_app_key');
+      const savedAppSecret = await getSetting('youdao_app_secret');
+      if (savedAppKey && savedAppSecret) {
+        setApiAppKey(savedAppKey);
+        setApiAppSecret(savedAppSecret);
+        setIsApiConfigured(true);
       }
     } catch (e) {
       console.error('加载设置失败:', e);
@@ -83,6 +99,50 @@ const Settings: Component = () => {
     if (!isNaN(value) && value > 0) {
       handleIntervalChange(value);
       setCustomInterval('');
+    }
+  };
+
+  // 保存 API 配置
+  const handleSaveApiConfig = async () => {
+    if (!apiAppKey() || !apiAppSecret()) {
+      setMessage({ type: 'error', text: '请填写完整的 API 配置' });
+      return;
+    }
+    setIsSaving(true);
+    try {
+      await setSetting('youdao_app_key', apiAppKey());
+      await setSetting('youdao_app_secret', apiAppSecret());
+      setIsApiConfigured(true);
+      setMessage({ type: 'success', text: 'API 配置已保存' });
+      setTimeout(() => setMessage(null), 2000);
+    } catch (e) {
+      setMessage({ type: 'error', text: '保存失败' });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  // 测试 API 连接
+  const handleTestApi = async () => {
+    if (!apiAppKey() || !apiAppSecret()) {
+      setMessage({ type: 'error', text: '请先填写 API 配置' });
+      return;
+    }
+    setTestingApi(true);
+    try {
+      const result = await invoke<{ success: boolean; message: string }>('test_youdao_api', {
+        appKey: apiAppKey(),
+        appSecret: apiAppSecret()
+      });
+      if (result.success) {
+        setMessage({ type: 'success', text: 'API 连接成功！' });
+      } else {
+        setMessage({ type: 'error', text: result.message });
+      }
+    } catch (e) {
+      setMessage({ type: 'error', text: `连接失败: ${e}` });
+    } finally {
+      setTestingApi(false);
     }
   };
 
@@ -156,11 +216,76 @@ const Settings: Component = () => {
       </div>
 
       <div class="settings-section">
+        <h3>🔑 有道 API 配置</h3>
+        <p class="settings-description">
+          配置有道智云 API 用于在线查询单词释义和下载词库。
+          <a href="#" onClick={(e) => { e.preventDefault(); window.open('https://ai.youdao.com/'); }}>
+            前往注册获取 API Key →
+          </a>
+        </p>
+
+        <Show when={isApiConfigured()}>
+          <div class="api-status configured">
+            ✅ API 已配置
+          </div>
+        </Show>
+
+        <div class="api-config-form">
+          <div class="form-group">
+            <label>App Key</label>
+            <input
+              type="text"
+              placeholder="请输入有道智云 App Key"
+              value={apiAppKey()}
+              onInput={(e) => setApiAppKey(e.currentTarget.value)}
+            />
+          </div>
+
+          <div class="form-group">
+            <label>App Secret</label>
+            <div class="password-input">
+              <input
+                type={showApiSecret() ? 'text' : 'password'}
+                placeholder="请输入有道智云 App Secret"
+                value={apiAppSecret()}
+                onInput={(e) => setApiAppSecret(e.currentTarget.value)}
+              />
+              <button
+                type="button"
+                class="btn-icon"
+                onClick={() => setShowApiSecret(!showApiSecret())}
+              >
+                {showApiSecret() ? '🙈' : '👁️'}
+              </button>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button
+              class="btn-secondary"
+              onClick={handleTestApi}
+              disabled={testingApi() || !apiAppKey() || !apiAppSecret()}
+            >
+              {testingApi() ? '测试中...' : '测试连接'}
+            </button>
+            <button
+              class="btn-primary"
+              onClick={handleSaveApiConfig}
+              disabled={isSaving() || !apiAppKey() || !apiAppSecret()}
+            >
+              {isSaving() ? '保存中...' : '保存配置'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
         <h3>💡 使用说明</h3>
         <ul class="settings-tips">
           <li>设置复习提醒间隔后，应用会定时弹出复习窗口</li>
           <li>弹窗会在后台自动打开，让你随时随地复习单词</li>
           <li>建议将间隔设置在 15-60 分钟之间，复习效果最佳</li>
+          <li>配置有道 API 后，可以在线搜索和下载单词</li>
         </ul>
       </div>
     </div>

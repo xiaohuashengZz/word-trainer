@@ -8,6 +8,7 @@ import WordList from './components/WordList';
 import Settings from './components/Settings';
 import TitleBar from './components/TitleBar';
 import WordBookDownload from './components/WordBookDownload';
+import WordSearchDownload from './components/WordSearchDownload';
 import './App.css';
 
 type Tab = 'review' | 'words' | 'add' | 'stats' | 'settings' | 'download';
@@ -34,7 +35,10 @@ const App: Component = () => {
         <Show when={activeTab() === 'words'}><WordList /></Show>
         <Show when={activeTab() === 'add'}><AddWordForm /></Show>
         <Show when={activeTab() === 'stats'}><Statistics /></Show>
-        <Show when={activeTab() === 'download'}><WordBookDownload /></Show>
+        <Show when={activeTab() === 'download'}>
+          <WordSearchDownload />
+          <WordBookDownload />
+        </Show>
         <Show when={activeTab() === 'settings'}><Settings /></Show>
       </main>
     </div>
